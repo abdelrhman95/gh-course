@@ -1,8 +1,32 @@
-# name: Deployment 
-# on: push 
-# jobs:
-#   lint: 
-#     runs-on: ubuntu-latest
-#     steps: 
-#       - name: checkout code 
-#         uses: actions/cheout@v3
+name: Deployment 
+on: push 
+jobs:
+  lint: 
+    runs-on: ubuntu-latest
+    steps: 
+      - name: checkout code 
+        uses: actions/cheout@v3
+      - name: install dependencies 
+        run: npm ci  
+      - name: run linter 
+        run: npm run lint 
+
+  test: 
+    runs-on: ubuntu-latest
+    steps: 
+      - name: checkout code 
+        uses: actions/cheout@v3
+      - name: install dependencies 
+        run: npm ci  
+      - name:  test code  
+        run: npm run test
+  
+  deploy: 
+    runs-on: ubuntu-latest
+    steps: 
+      - name: checkout code 
+        uses: actions/cheout@v3
+      - name: install dependencies 
+        run: npm ci  
+      - name: deploy code 
+        run: echo "Deploying code to production"
